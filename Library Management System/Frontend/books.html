@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMS - Books Directory</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; display: flex; min-height: 100vh; }
+    
+    /* Sidebar Layout */
+    .sidebar { width: 250px; background: #1e293b; color: white; display: flex; flex-direction: column; min-height: 100vh; }
+    .brand { padding: 24px; font-size: 1.2rem; font-weight: bold; color: #818cf8; border-bottom: 1px solid #334155; }
+    .menu { list-style: none; padding: 20px 0; flex: 1; }
+    .menu a { display: block; padding: 12px 24px; color: #94a3b8; text-decoration: none; font-weight: 500; }
+    .menu a:hover, .menu a.active { background: #334155; color: white; border-left: 4px solid #4f46e5; }
+    
+    /* Main Content Area */
+    .main { flex: 1; padding: 32px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .btn-primary { background: #4f46e5; color: white; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    .btn-primary:hover { background: #4338ca; }
+    
+    /* Table Styling */
+    .card { background: white; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 16px 24px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    th { background: #f8fafc; font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    td { font-size: 0.95rem; color: #334155; }
+    tr:last-child td { border-bottom: none; }
+    
+    /* Thumbnails */
+    .book-title { font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 14px; }
+    .thumb-container { width: 40px; height: 56px; border-radius: 4px; overflow: hidden; background: #e2e8f0; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    .btn-action { display: inline-block; padding: 6px 14px; background: #f1f5f9; color: #475569; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem; margin-right: 6px; }
+    .btn-action:hover { background: #e2e8f0; color: #0f172a; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="brand">📚 LMS Portal</div>
+    <ul class="menu">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="books.html" class="active">Book List</a></li>
+      <li><a href="book-add-edit.html">Add Book</a></li>
+      <li><a href="authors.html">Authors</a></li>
+      <li><a href="genres.html">Genres</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="#" id="logout" style="color: #f87171;">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h2>Books Directory</h2>
+      <a href="book-add-edit.html" class="btn-primary">+ Add New Book</a>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="book-title">
+              <div class="thumb-container">
+                <img src="https://covers.openlibrary.org/b/isbn/9780132350884-M.jpg" class="thumb-img" alt="Clean Code">
+              </div>
+              Clean Code
+            </td>
+            <td>Robert C. Martin</td>
+            <td>Technology</td>
+            <td>12</td>
+            <td>
+              <a href="book-view.html?id=1" class="btn-action">View</a>
+              <a href="book-add-edit.html?id=1" class="btn-action">Edit</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="book-title">
+              <div class="thumb-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_digitized.jpg" class="thumb-img" alt="The Great Gatsby">
+              </div>
+              The Great Gatsby
+            </td>
+            <td>F. Scott Fitzgerald</td>
+            <td>Fiction</td>
+            <td>2</td>
+            <td>
+              <a href="book-view.html?id=2" class="btn-action">View</a>
+              <a href="book-add-edit.html?id=2" class="btn-action">Edit</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="book-title">
+              <div class="thumb-container">
+                <img src="https://covers.openlibrary.org/b/isbn/9780060935467-M.jpg" class="thumb-img" alt="To Kill a Mockingbird">
+              </div>
+              To Kill a Mockingbird
+            </td>
+            <td>Harper Lee</td>
+            <td>Fiction</td>
+            <td>8</td>
+            <td>
+              <a href="book-view.html?id=3" class="btn-action">View</a>
+              <a href="book-add-edit.html?id=3" class="btn-action">Edit</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="book-title">
+              <div class="thumb-container">
+                <img src="https://covers.openlibrary.org/b/isbn/9780451524935-M.jpg" class="thumb-img" alt="1984">
+              </div>
+              1984
+            </td>
+            <td>George Orwell</td>
+            <td>Dystopian</td>
+            <td>15</td>
+            <td>
+              <a href="book-view.html?id=4" class="btn-action">View</a>
+              <a href="book-add-edit.html?id=4" class="btn-action">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Authentication guard
+    if (localStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
+    
+    document.getElementById('logout').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

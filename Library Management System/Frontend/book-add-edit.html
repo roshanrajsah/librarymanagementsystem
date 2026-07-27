@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMS - Add / Edit Book</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f8fafc; display: flex; min-height: 100vh; }
+    .sidebar { width: 250px; background: #1e293b; color: white; display: flex; flex-direction: column; min-height: 100vh; }
+    .brand { padding: 24px; font-size: 1.2rem; font-weight: bold; color: #818cf8; border-bottom: 1px solid #334155; }
+    .menu { list-style: none; padding: 20px 0; flex: 1; }
+    .menu a { display: block; padding: 12px 24px; color: #94a3b8; text-decoration: none; font-weight: 500; }
+    .menu a:hover, .menu a.active { background: #334155; color: white; border-left: 4px solid #4f46e5; }
+    .main { flex: 1; padding: 32px; }
+    .header { margin-bottom: 24px; }
+    .card { background: white; padding: 28px; border-radius: 10px; border: 1px solid #e2e8f0; max-width: 600px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 0.9rem; font-weight: 600; color: #334155; margin-bottom: 6px; }
+    input, select { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; font-size: 0.95rem; background: white; }
+    input:focus, select:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
+    .btn { background: #4f46e5; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
+    .btn:hover { background: #4338ca; }
+    .preview { width: 100px; height: 140px; object-fit: cover; margin-top: 10px; border-radius: 6px; border: 1px solid #cbd5e1; display: none; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="brand">📚 LMS Portal</div>
+    <ul class="menu">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="books.html">Book List</a></li>
+      <li><a href="book-add-edit.html" class="active">Add Book</a></li>
+      <li><a href="authors.html">Authors</a></li>
+      <li><a href="genres.html">Genres</a></li>
+      <li><a href="profile.html">My Profile</a></li>
+      <li><a href="#" id="logout" style="color: #f87171;">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h2>Add / Edit Book</h2>
+    </div>
+
+    <div class="card">
+      <form id="bookForm">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" placeholder="Enter book title" required>
+        </div>
+
+        <div class="form-group">
+          <label>Author *</label>
+          <select required>
+            <option value="">Select Author</option>
+            <option value="Robert C. Martin">Robert C. Martin</option>
+            <option value="F. Scott Fitzgerald">F. Scott Fitzgerald</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Genre *</label>
+          <select required>
+            <option value="">Select Genre</option>
+            <option value="Technology">Technology</option>
+            <option value="Fiction">Fiction</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Stock Quantity *</label>
+          <input type="number" min="0" placeholder="e.g. 10" required>
+        </div>
+
+        <div class="form-group">
+          <label>Cover Image Upload *</label>
+          <input type="file" id="cover" accept="image/*">
+          <img id="imgPreview" class="preview" alt="Preview">
+        </div>
+
+        <button type="submit" class="btn">Save Book</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
+    document.getElementById('logout').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      window.location.href = 'login.html';
+    });
+
+    document.getElementById('cover').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const img = document.getElementById('imgPreview');
+          img.src = evt.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById('bookForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Book saved successfully!');
+      window.location.href = 'books.html';
+    });
+  </script>
+</body>
+</html>
