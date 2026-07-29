@@ -1,164 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMS - View Book Details</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #f8fafc; display: flex; min-height: 100vh; }
-    
-    .sidebar { width: 250px; background: #1e293b; color: white; display: flex; flex-direction: column; min-height: 100vh; }
-    .brand { padding: 24px; font-size: 1.2rem; font-weight: bold; color: #818cf8; border-bottom: 1px solid #334155; }
-    .menu { list-style: none; padding: 20px 0; flex: 1; }
-    .menu a { display: block; padding: 12px 24px; color: #94a3b8; text-decoration: none; font-weight: 500; }
-    .menu a:hover, .menu a.active { background: #334155; color: white; border-left: 4px solid #4f46e5; }
-    
-    .main { flex: 1; padding: 32px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    
-    .card { background: white; padding: 32px; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; gap: 32px; align-items: flex-start; max-width: 850px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .btn-sec { background: #e2e8f0; color: #1e293b; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    .btn-sec:hover { background: #cbd5e1; }
-    .btn-primary { background: #4f46e5; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-right: 8px; }
-    .btn-primary:hover { background: #4338ca; }
-    
-    .cover-box { width: 200px; height: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); background: #e2e8f0; flex-shrink: 0; }
-    .cover-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    
-    .info { flex: 1; }
-    .info h2 { font-size: 1.8rem; color: #0f172a; margin-bottom: 6px; }
-    .info .author { color: #64748b; font-size: 1.1rem; margin-bottom: 20px; font-weight: 500; }
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; }
-    .info-item label { display: block; font-size: 0.75rem; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
-    .info-item p { font-size: 1rem; color: #0f172a; font-weight: 600; }
-    .description { color: #475569; font-size: 0.95rem; line-height: 1.6; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Book details · LibraryHub</title>
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
-  <div class="sidebar">
-    <div class="brand">📚 LMS Portal</div>
-    <ul class="menu">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="books.html" class="active">Book List</a></li>
-      <li><a href="book-add-edit.html">Add Book</a></li>
-      <li><a href="authors.html">Authors</a></li>
-      <li><a href="genres.html">Genres</a></li>
-      <li><a href="profile.html">My Profile</a></li>
-      <li><a href="#" id="logout" style="color: #f87171;">Logout</a></li>
-    </ul>
-  </div>
 
-  <div class="main">
-    <div class="header">
-      <h2>Book Details</h2>
-      <div>
-        <a href="#" id="edit-link" class="btn-primary">Edit Book</a>
-        <a href="books.html" class="btn-sec">Back to List</a>
-      </div>
+<body data-page="books">
+    <div class="layout">
+        <aside id="sidebar" class="sidebar"></aside>
+        <main class="main">
+            <header class="page-heading">
+                <div>
+                    <h1>Book details</h1>
+                    <p>Collection record and availability.</p>
+                </div><a class="button secondary" href="/books">Back to books</a>
+            </header>
+            <section id="bookDetails"></section>
+        </main>
     </div>
-
-    <div class="card">
-      <div class="cover-box">
-        <img id="book-cover" src="" alt="Book Cover">
-      </div>
-      <div class="info">
-        <h2 id="book-title">Loading...</h2>
-        <div class="author" id="book-author">Loading...</div>
-        
-        <div class="info-grid">
-          <div class="info-item">
-            <label>Genre</label>
-            <p id="book-genre">-</p>
-          </div>
-          <div class="info-item">
-            <label>Stock Quantity</label>
-            <p id="book-stock" style="color: #16a34a;">-</p>
-          </div>
-          <div class="info-item">
-            <label>ISBN</label>
-            <p id="book-isbn">-</p>
-          </div>
-          <div class="info-item">
-            <label>Status</label>
-            <p id="book-status" style="color: #16a34a;">In Stock</p>
-          </div>
-        </div>
-
-        <p class="description" id="book-desc">Loading description...</p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Local Database mapped to your local image files
-      const booksDatabase = {
-        "1": {
-          title: "Clean Code",
-          author: "Robert C. Martin",
-          genre: "Technology",
-          stock: 12,
-          isbn: "978-0132350884",
-          cover: "image/cleancode.jpg",
-          description: "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code."
-        },
-        "2": {
-          title: "The Great Gatsby",
-          author: "F. Scott Fitzgerald",
-          genre: "Fiction",
-          stock: 2,
-          isbn: "978-0743273565",
-          cover: "image/thegreatgatsby.jpg",
-          description: "The Great Gatsby, F. Scott Fitzgerald's third book, stands as the supreme achievement of his career. This exemplary novel of the Jazz Age has been acclaimed by generations of readers."
-        },
-        "3": {
-          title: "To Kill a Mockingbird",
-          author: "Harper Lee",
-          genre: "Fiction",
-          stock: 8,
-          isbn: "978-0060935467",
-          cover: "image/tokillamockingbird.jpg",
-          description: "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it. 'To Kill A Mockingbird' became both an instant bestseller and a critical success."
-        },
-        "4": {
-          title: "1984",
-          author: "George Orwell",
-          genre: "Dystopian",
-          stock: 15,
-          isbn: "978-0451524935",
-          cover: "image/1984.jpg", // Rename to image/1984.jpg if you want!
-          description: "Winston Smith rewrites history for the Ministry of Truth, but secretly longs to rebel against Big Brother in a dystopian totalitarian society where critical thought is suppressed."
-        }
-      };
-
-      // Extract book ID from query string (?id=1)
-      const urlParams = new URLSearchParams(window.location.search);
-      const bookId = urlParams.get('id') || "1"; 
-      const book = booksDatabase[bookId] || booksDatabase["1"];
-
-      // Update DOM values
-      document.getElementById('book-title').innerText = book.title;
-      document.getElementById('book-author').innerText = `By ${book.author}`;
-      document.getElementById('book-genre').innerText = book.genre;
-      document.getElementById('book-stock').innerText = `${book.stock} Units`;
-      document.getElementById('book-isbn').innerText = book.isbn;
-      document.getElementById('book-desc').innerText = book.description;
-      document.getElementById('book-cover').src = book.cover;
-
-      const editLink = document.getElementById('edit-link');
-      if (editLink) editLink.href = `book-add-edit.html?id=${bookId}`;
-
-      // Handle Logout
-      const logoutBtn = document.getElementById('logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          localStorage.removeItem('isLoggedIn');
-          window.location.href = 'login.html';
-        });
-      }
-    });
-  </script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/book-view.js"></script>
 </body>
+
 </html>

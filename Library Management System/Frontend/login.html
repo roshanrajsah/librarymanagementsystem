@@ -1,51 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMS - Login</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #0f172a; display: flex; align-items: center; justify-content: center; height: 100vh; }
-    .card { background: white; padding: 40px; border-radius: 12px; width: 360px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-    h2 { margin-bottom: 8px; color: #1e293b; text-align: center; }
-    p.sub { color: #64748b; font-size: 0.9rem; text-align: center; margin-bottom: 24px; }
-    .group { margin-bottom: 16px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; color: #475569; margin-bottom: 6px; }
-    input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; font-size: 0.95rem; }
-    input:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
-    button { width: 100%; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 1rem; }
-    button:hover { background: #4338ca; }
-    .error { color: #ef4444; background: #fef2f2; border: 1px solid #fca5a5; padding: 10px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px; display: none; text-align: center; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LibraryHub · Sign in</title>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #182238, #4f46e5);
+            min-height: 100vh
+        }
+
+        .login {
+            width: min(430px, calc(100% - 32px));
+            padding: 34px
+        }
+
+        .login h1 {
+            margin: 0
+        }
+
+        .login p {
+            color: var(--muted);
+            margin: 6px 0 24px
+        }
+    </style>
 </head>
-<body>
-  <div class="card">
-    <h2>📚 Library Portal</h2>
-    <p class="sub">Sign in to manage books and authors</p>
-    <div id="error" class="error">Invalid username or password!</div>
-    <form id="loginForm">
-      <div class="group">
-        <label>Username</label>
-        <input type="text" id="username" placeholder="admin" required>
-      </div>
-      <div class="group">
-        <label>Password</label>
-        <input type="password" id="password" placeholder="admin123" required>
-      </div>
-      <button type="submit">Log In</button>
-    </form>
-  </div>
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (document.getElementById('username').value === 'admin' && document.getElementById('password').value === 'admin123') {
-        localStorage.setItem('isLoggedIn', 'true');
-        window.location.href = 'dashboard.html';
-      } else {
-        document.getElementById('error').style.display = 'block';
-      }
-    });
-  </script>
+
+<body data-page="login">
+    <main class="card login"><a class="brand" style="color:var(--ink);padding:0" href="/">Library<span>Hub</span></a>
+        <h1>Welcome back</h1>
+        <p>Sign in to manage your collection.</p>
+        <form id="loginForm" class="form-grid">
+            <div class="field full"><label>Username</label><input id="username" required value="admin"></div>
+            <div class="field full"><label>Password</label><input id="password" type="password" required
+                    value="admin123"></div>
+            <div class="field full"><button class="button" style="width:100%">Sign in</button></div>
+        </form>
+    </main>
+    <script src="assets/js/login.js"></script>
 </body>
+
 </html>

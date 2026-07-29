@@ -1,79 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LMS - Authors</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #f8fafc; display: flex; min-height: 100vh; }
-    .sidebar { width: 250px; background: #1e293b; color: white; display: flex; flex-direction: column; min-height: 100vh; }
-    .brand { padding: 24px; font-size: 1.2rem; font-weight: bold; color: #818cf8; border-bottom: 1px solid #334155; }
-    .menu { list-style: none; padding: 20px 0; flex: 1; }
-    .menu a { display: block; padding: 12px 24px; color: #94a3b8; text-decoration: none; font-weight: 500; }
-    .menu a:hover, .menu a.active { background: #334155; color: white; border-left: 4px solid #4f46e5; }
-    .main { flex: 1; padding: 32px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .btn { background: #4f46e5; color: white; padding: 10px 16px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem; }
-    .card { background: white; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
-    th { background: #f1f5f9; color: #64748b; font-size: 0.85rem; text-transform: uppercase; }
-    .action-btn { padding: 6px 12px; background: #f1f5f9; color: #334155; text-decoration: none; border-radius: 4px; font-size: 0.8rem; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Authors · LibraryHub</title>
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
-  <div class="sidebar">
-    <div class="brand">📚 LMS Portal</div>
-    <ul class="menu">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="books.html">Book List</a></li>
-      <li><a href="book-add-edit.html">Add Book</a></li>
-      <li><a href="authors.html" class="active">Authors</a></li>
-      <li><a href="genres.html">Genres</a></li>
-      <li><a href="profile.html">My Profile</a></li>
-      <li><a href="#" id="logout" style="color: #f87171;">Logout</a></li>
-    </ul>
-  </div>
 
-  <div class="main">
-    <div class="header">
-      <h2>Authors List</h2>
-      <a href="author-add-edit.html" class="btn">+ Add Author</a>
+<body data-page="authors">
+    <div class="layout">
+        <aside id="sidebar" class="sidebar"></aside>
+        <main class="main">
+            <header class="page-heading">
+                <div>
+                    <h1>Authors</h1>
+                    <p>Manage the writers in your collection.</p>
+                </div><a class="button" href="/author-add-edit">Add author</a>
+            </header>
+            <section class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Biography</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="authorRows"></tbody>
+                </table>
+            </section>
+        </main>
     </div>
-
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>AUTHOR NAME</th>
-            <th>BIOGRAPHY</th>
-            <th>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Robert C. Martin</strong></td>
-            <td>Software engineer and author of Agile and Clean Code series.</td>
-            <td><a href="author-add-edit.html" class="action-btn">Edit</a></td>
-          </tr>
-          <tr>
-            <td><strong>F. Scott Fitzgerald</strong></td>
-            <td>American novelist known for depictions of the Jazz Age.</td>
-            <td><a href="author-add-edit.html" class="action-btn">Edit</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <script>
-    if (localStorage.getItem('isLoggedIn') !== 'true') window.location.href = 'login.html';
-    document.getElementById('logout').addEventListener('click', (e) => {
-      e.preventDefault();
-      localStorage.removeItem('isLoggedIn');
-      window.location.href = 'login.html';
-    });
-  </script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/authors.js"></script>
 </body>
+
 </html>
