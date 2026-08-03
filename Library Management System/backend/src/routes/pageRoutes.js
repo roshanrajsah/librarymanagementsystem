@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const router = express.Router();
-const frontendDirectory = path.join(__dirname, '../../../frontend');
+const frontendDirectory = path.join(__dirname, '../../../Frontend');
 
 const pages = {
   login: 'login.html', signup: 'signup.html',
