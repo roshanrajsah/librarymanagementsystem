@@ -1,15 +1,30 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-
-const databasePath = path.join(__dirname, '../database/library.sqlite');
-const db = new sqlite3.Database(databasePath, (error) => {
-  if (error) {
-    console.error('Database connection error:', error.message);
-    return;
-  }
-  console.log('Connected to SQLite database.');
+const { createClient } = require('@libsql/client');
+ 
+const db = createClient({
+  url: process.env.TURSO_DATABASE_URL,
+  authToken: process.env.TURSO_AUTH_TOKEN,
 });
-
-db.run('PRAGMA foreign_keys = ON');
-
-module.exports = db;
+ 
+async function get(sql, args = []) {
+  const result = await db.execute({ sql, args });
+  return result.rows[0];
+}
+ 
+async function all(sql, args = []) {
+  const result = await db.execute({ sql, args });
+  return result.rows;
+}
+ 
+async function run(sql, args = []) {
+  const result = await db.execute({ sql, args });
+  return {
+    // Turso returns this as a BigInt — JSON.stringify cannot
+    // serialize BigInt, so convert it to a plain Number here.
+    lastInsertRowid: result.lastInsertRowid != null
+      ? Number(result.lastInsertRowid) : null,
+    changes: result.rowsAffected,
+  };
+  console.log("Database connected successfully to Turso")
+}
+ 
+module.exports = { db, get, all, run };
