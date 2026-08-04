@@ -13,6 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
 app.use('/api/auth', authRoutes);
 app.use('/api', resourceRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -20,11 +21,18 @@ app.use('/', pageRoutes);
 
 initializeDatabase()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    console.log('Database initialized');
+
+    // Only start server when running locally
+    if (require.main === module) {
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    }
   })
   .catch((error) => {
     console.error('Database initialization failed:', error.message);
     process.exit(1);
   });
+
+module.exports = app;
