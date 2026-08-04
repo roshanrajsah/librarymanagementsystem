@@ -1,30 +1,13 @@
-const { createClient } = require('@libsql/client');
- 
-const db = createClient({
-  url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
+
+// The models use sqlite3's callback API. Keeping the database local lets the
+// application start even when a remote Turso connection is unavailable.
+const db = new sqlite3.Database(path.join(__dirname, '../database/library.sqlite'), error => {
+  if (error) console.error('Unable to open the local database:', error.message);
+  else console.log('Connected to the local SQLite database.');
 });
- 
-async function get(sql, args = []) {
-  const result = await db.execute({ sql, args });
-  return result.rows[0];
-}
- 
-async function all(sql, args = []) {
-  const result = await db.execute({ sql, args });
-  return result.rows;
-}
- 
-async function run(sql, args = []) {
-  const result = await db.execute({ sql, args });
-  return {
-    // Turso returns this as a BigInt — JSON.stringify cannot
-    // serialize BigInt, so convert it to a plain Number here.
-    lastInsertRowid: result.lastInsertRowid != null
-      ? Number(result.lastInsertRowid) : null,
-    changes: result.rowsAffected,
-  };
-  console.log("Database connected successfully to Turso")
-}
- 
-module.exports = { db, get, all, run };
+
+db.run('PRAGMA foreign_keys = ON');
+
+module.exports = db;
