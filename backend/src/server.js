@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
 const pageRoutes = require('./routes/pageRoutes');
 const authRoutes = require('./routes/authRoutes');
 const resourceRoutes = require('./routes/resourceRoutes');
@@ -19,7 +21,7 @@ app.use('/', pageRoutes);
 initializeDatabase()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {

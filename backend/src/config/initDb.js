@@ -6,12 +6,12 @@ const Borrowing = require('../models/Borrowing');
 const seedAdmin = require('../seeder/adminSeeder');
 
 const initializeDatabase = async () => {
-  await User.createUserTable();
-  await Author.createAuthorTable();
-  await Genre.createGenreTable();
-  await Book.createBookTable();
-  await Borrowing.createBorrowingTable();
-  await seedAdmin();
+  // await User.createUserTable();
+  // await Author.createAuthorTable();
+  // await Genre.createGenreTable();
+  // await Book.createBookTable();
+  // await Borrowing.createBorrowingTable();
+  // await seedAdmin();
 };
 
 module.exports = initializeDatabase;
