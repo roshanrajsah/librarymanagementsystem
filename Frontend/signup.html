@@ -1,1 +1,58 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Create account · LibraryHub</title><link rel="stylesheet" href="assets/css/app.css"><style>body{display:grid;place-items:center;background:linear-gradient(135deg,#182238,#4f46e5);min-height:100vh}.login{width:min(600px,calc(100% - 32px));padding:34px}.login h1{margin:0}.login p{color:var(--muted);margin:6px 0 24px}</style></head><body><main class="card login"><a class="brand" style="color:var(--ink);padding:0" href="/">Library<span>Hub</span></a><h1>Create your account</h1><p>Start exploring the library collection.</p><form id="signupForm" class="form-grid"><div class="field"><label>First name</label><input id="firstName" required></div><div class="field"><label>Last name</label><input id="lastName" required></div><div class="field full"><label>Username</label><input id="username" required></div><div class="field full"><label>Password</label><input id="password" type="password" minlength="6" required></div><div class="field"><label>Phone number</label><input id="phoneNumber" type="tel"></div><div class="field"><label>Gender</label><select id="gender"><option value="">Prefer not to say</option><option>Female</option><option>Male</option><option>Other</option></select></div><div class="field full"><label>Address</label><textarea id="address"></textarea></div><div class="field full"><button class="button" style="width:100%">Create account</button></div></form><p style="margin-bottom:0">Already a member? <a href="/login">Sign in</a></p></main><script src="assets/js/signup.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create account · LibraryHub</title>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #182238, #4f46e5);
+            min-height: 100vh
+        }
+
+        .login {
+            width: min(600px, calc(100% - 32px));
+            padding: 34px
+        }
+
+        .login h1 {
+            margin: 0
+        }
+
+        .login p {
+            color: var(--muted);
+            margin: 6px 0 24px
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card login"><a class="brand" style="color:var(--ink);padding:0" href="/">Library<span>Hub</span></a>
+        <h1>Create your account</h1>
+        <p>Start exploring the library collection.</p>
+        <form id="signupForm" class="form-grid">
+            <div class="field"><label>First name</label><input id="firstName" required></div>
+            <div class="field"><label>Last name</label><input id="lastName" required></div>
+            <div class="field full"><label>Username</label><input id="username" required></div>
+            <div class="field full"><label>Password</label><input id="password" type="password" minlength="6" required>
+            </div>
+            <div class="field"><label>Phone number</label><input id="phoneNumber" type="tel"></div>
+            <div class="field"><label>Gender</label><select id="gender">
+                    <option value="">Prefer not to say</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Other</option>
+                </select></div>
+            <div class="field full"><label>Address</label><textarea id="address"></textarea></div>
+            <div class="field full"><button class="button" style="width:100%">Create account</button></div>
+        </form>
+        <p style="margin-bottom:0">Already a member? <a href="login.html">Sign in</a></p>
+    </main>
+    <script src="assets/js/signup.js"></script>
+</body>
+
+</html>
