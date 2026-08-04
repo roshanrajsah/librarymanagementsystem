@@ -16,24 +16,8 @@
       "dest": "backend/src/server.js"
     },
     {
-      "src": "/user/books",
-      "dest": "/Frontend/books.html"
-    },
-    {
-      "src": "/user/dashboard",
-      "dest": "/Frontend/dashboard.html"
-    },
-    {
-      "src": "/user/profile",
-      "dest": "/Frontend/profile.html"
-    },
-    {
-      "src": "/user/(.*)",
-      "dest": "/Frontend/$1.html"
-    },
-    {
       "src": "/(login|signup|dashboard|books|book-add-edit|book-view|authors|author-add-edit|genres|genre-add-edit|profile)(\\.html)?",
-      "dest": "/Frontend/$1"
+      "dest": "backend/src/server.js"
     },
     {
       "src": "/$",
@@ -41,7 +25,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/Frontend/$1"
+      "dest": "Frontend/$1"
     }
   ]
 }
