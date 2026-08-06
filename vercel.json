@@ -16,6 +16,10 @@
       "dest": "backend/src/server.js"
     },
     {
+      "src": "/uploads/(.*)",
+      "dest": "backend/src/server.js"
+    },
+    {
       "src": "/user/(.*)",
       "dest": "backend/src/server.js"
     },
