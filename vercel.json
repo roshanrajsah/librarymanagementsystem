@@ -16,6 +16,10 @@
       "dest": "backend/src/server.js"
     },
     {
+      "src": "/user/(.*)",
+      "dest": "backend/src/server.js"
+    },
+    {
       "src": "/(login|signup|dashboard|books|book-add-edit|book-view|authors|author-add-edit|genres|genre-add-edit|profile)(\\.html)?",
       "dest": "backend/src/server.js"
     },
@@ -25,7 +29,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "Frontend/$1"
+      "dest": "/Frontend/$1"
     }
   ]
 }
